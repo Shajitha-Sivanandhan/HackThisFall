@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MetaMask Connect</title>
+</head>
+<body>
+    <h2>Connect to MetaMask</h2>
+    <button id="connect-button">Connect MetaMask</button>
+    <p id="status"></p>
+
+    <script>
+        const isMetaMaskInstalled = () => typeof window.ethereum !== 'undefined';
+
+        document.getElementById('connect-button').addEventListener('click', async () => {
+            if (isMetaMaskInstalled()) {
+                try {
+                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    const address = accounts[0];
+                    document.getElementById('status').innerText = "Connected: " + address;
+
+                    // Redirect to the root URL of the Streamlit app with the address as a URL parameter
+                    window.location.href = `http://localhost:8501?address=${address}`;
+                } catch (error) {
+                    document.getElementById('status').innerText = "MetaMask connection failed. " + error.message;
+                    console.error("MetaMask connection failed", error);
+                }
+            } else {
+                document.getElementById('status').innerText = "MetaMask is not installed.";
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+[
+    {
+      "id": "1",
+      "name": "Tender for Building Construction",
+      "description": "Construction of a 5-story building.",
+      "min_bid_inr": 500000,
+      "min_bid_eth": 5,
+      "end_time": "2024-11-20 17:00:00",
+      "category": "Lower bid wins"
+    },
+    {
+      "id": "2",
+      "name": "Tender for Software Development",
+      "description": "Develop a custom ERP system.",
+      "min_bid_inr": 200000,
+      "min_bid_eth": 2,
+      "end_time": "2024-11-15 15:00:00",
+      "category": "Higher bid wins"
+    }
+  ]
+  
