@@ -6,7 +6,8 @@
       "salary": 80000,
       "occupation": "Civil Engineer",
       "previous_tenders_count": 5,
-      "status": "Approved"
+      "status": "Approved",
+      "tender_id": "1"
     },
     {
       "bidder_wallet": "0xdef456...",
@@ -15,7 +16,8 @@
       "salary": 120000,
       "occupation": "Software Developer",
       "previous_tenders_count": 3,
-      "status": "Under Review"
+      "status": "Under Review",
+      "tender_id": "2"
     }
   ]
   

@@ -4,11 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MetaMask Connect</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #f6851b;
+            color: white;
+            font-size: 16px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #e17718;
+        }
+        p {
+            margin-top: 20px;
+            color: #555;
+        }
+        #status {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-    <h2>Connect to MetaMask</h2>
-    <button id="connect-button">Connect MetaMask</button>
-    <p id="status"></p>
+    <div class="container">
+        <h2>Connect to MetaMask</h2>
+        <button id="connect-button">Connect MetaMask</button>
+        <p id="status"></p>
+    </div>
 
     <script>
         const isMetaMaskInstalled = () => typeof window.ethereum !== 'undefined';
