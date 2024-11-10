@@ -1,15 +1,27 @@
 import streamlit as st
-import time
-
-# Import necessary functions (assuming they exist in your project)
+from web3 import Web3
+from config import CONTRACT_ABI, CONTRACT_ADDRESS, OWNER_ADDRESS
 import tender_creation
 import bid_submission
 import active_tenders
 import tender_details
 import sidebar  # Import sidebar navigation function
+import logging
+
+# Initialize Web3
+w3 = Web3(Web3.HTTPProvider("http://127.0.0.1:8545"))  # Replace with your Ethereum node provider
+
+# Check if Web3 is connected
+
+
+# Connect to the contract
+contract = w3.eth.contract(address=CONTRACT_ADDRESS, abi=CONTRACT_ABI)
 
 # Store the owner's wallet address in the OWNER variable
-OWNER = "0xe0b91993111a6c70f3e38438b82eaae79206b4b"  # Replace with the actual owner's address
+OWNER = OWNER_ADDRESS
+
+# Set up logging to capture error details (optional)
+logging.basicConfig(filename='app_error_log.txt', level=logging.ERROR)
 
 def main():
     st.set_page_config(page_title="Bidding and Tendering Platform", layout="wide")
@@ -77,16 +89,25 @@ def main():
         else:
             st.markdown("**Page not available.**")
 
-    # Remove the continuous current time display unless needed
-    # time_display = st.empty()
-    # while True:
-    #     current_time = time.strftime("%H:%M:%S")  # Get the current time in HH:MM:SS format
-    #     time_display.markdown(
-    #         f"**Current Time:** {current_time}",
-    #         unsafe_allow_html=True
-    #     )
-    #     time.sleep(1)  # Wait for 1 second before updating the time
+    # Example: You can call contract functions here if needed
+    try:
+        # Check if bidding is open
+        if contract.functions.isBiddingOpen().call():
+            st.markdown("Bidding is open!")
+        else:
+            st.markdown("Bidding is closed.")
+        
+        # Example: Use Web3 to get details of the current winner or bidders
+        winner_address = contract.functions.winner().call()
+        winner_name, winner_amount = contract.functions.getBidderDetails(winner_address).call()
+        st.markdown(f"### Winner: {winner_name} ({winner_address}) with a bid of {winner_amount} ETH")
 
+    except Exception as e:
+        # Log the error to a file (optional)
+        logging.error(f"Error interacting with contract: {str(e)}")
+        
+        # Display a user-friendly message without showing the error details
+        
 
 if __name__ == "__main__":
     main()
